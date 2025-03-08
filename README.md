@@ -98,8 +98,79 @@ The dataset consists of 9,800 rows of sales transactions for an e-commerce compa
     ```python
     df['delivery_delay'] = (df['Ship Date'] - df['Order Date']).dt.days
 
+## EDA (Exploratory Data Analysis) and Visualization
+
+1. Data Overview
+
+**Goal**: Understand the general structure of the dataset and check for any immediate issues.
+
+- **Summary Statistics**: Get a quick overview of the dataset's numerical columns.
+- **Data Types and Null Values**: Identify columns with missing or incorrect data types.
+- **Count Unique Values**: Use `.nunique()` to get the count of unique entries for categorical columns such as Category, Segment, Region, Sub-Category, etc.
+
+  ```python
+  df.describe()
+
+  df.info()
+
+  df.isnull().sum()
+
+  df.nunique()
+
+2. Sales Perfomance
+
+   - **Top Performing Categories/Sub-Categories**
+
+In this section, I analyze the sales distribution across different product **Categories** and **Sub-Categories** to identify top-performing areas.
+
+- **Sales by Category**
+
+  ```python
+  import matplotlib.pyplot as plt
+  import seaborn as sns
+
+  category_sales = df.groupby('Category')['Sales'].sum().sort_values(ascending=False)
+
+  colors = ['skyblue', 'red', 'navy']
+
+  plt.figure(figsize=(10, 6))
+
+  category_sales.head(3).plot(kind='bar', color=colors)
+
+  plt.title("Sales by Category")
+  plt.xlabel("Category")
+  plt.ylabel("Total Sales")
+  plt.xticks(rotation=45)
+  plt.show()
+
+![Screenshot (41)](https://github.com/user-attachments/assets/a9712e6a-d1d7-473d-8a40-e65f9f96b93f)
 
 
+**Top Performing Sub-Categories**
+
+In this section, I analyze the sales distribution across the top 10 **Sub-Categories** to identify the highest-performing areas.
+
+    ```python
+    import matplotlib.pyplot as plt
+
+    subcategory_sales = df.groupby('Sub-Category')['Sales'].sum().sort_values(ascending=False).head(10)
+
+    colors = ['skyblue', 'red', 'green', 'orange', 'purple', 'pink', 'brown', 'yellow', 'gray', 'lightblue']
+
+    plt.figure(figsize=(10, 6))
+
+    subcategory_sales.plot(kind='bar', color=colors)
+
+    plt.title("Top 10 Sales by Sub-Category")
+    plt.xlabel("Sub-Category")
+    plt.ylabel("Total Sales")
+    plt.xticks(rotation=45)
+    plt.show()
+    
+![Screenshot (42)](https://github.com/user-attachments/assets/4798bd3f-7068-469f-b7ef-92b7179dd9f6)
+
+
+   
 
 
 
