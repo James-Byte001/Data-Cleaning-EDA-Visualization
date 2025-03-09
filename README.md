@@ -169,6 +169,113 @@ In this section, I analyze the sales distribution across the top 10 **Sub-Catego
     
 ![Screenshot (42)](https://github.com/user-attachments/assets/4798bd3f-7068-469f-b7ef-92b7179dd9f6)
 
+## Top 10 Products by Sales
+
+In this section, I analyze the sales distribution across the top 10 **Products** to identify the highest-performing items. By grouping the data by **Product Name** and summing the total sales, I highlight the products that contribute most to overall sales performance.
+
+    ```python
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+
+    top_products = df.groupby('Product Name')['Sales'].sum().reset_index()
+    top_products_sorted = top_products.sort_values(by='Sales', ascending=False)
+    top_10_products = top_products_sorted.head(10)
+
+    custom_colors = sns.color_palette("Set1", n_colors=10)
+
+    plt.figure(figsize=(10,6))
+    sns.barplot(x='Sales', y='Product Name', data=top_10_products, palette=custom_colors)
+
+    plt.title('Top 10 Products by Sales', fontsize=16)
+    plt.xlabel('Total Sales', fontsize=12)
+    plt.ylabel('Product Name', fontsize=12)
+
+    plt.tight_layout()
+    plt.show()
+
+ ## Sales Trend by Year
+
+In this section, I visualize the sales trend over the years by grouping the data by **Year** and summing the total sales for each year. The following code generates a line plot to show how sales have varied across different years.
+
+    ```python
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+
+    df['Order Date'] = pd.to_datetime(df['Order Date'])
+    df['Year'] = df['Order Date'].dt.year
+    sales_by_year = df.groupby('Year')['Sales'].sum().reset_index()
+
+    plt.figure(figsize=(10,6))
+    sns.lineplot(x='Year', y='Sales', data=sales_by_year, marker='o', color='r')
+
+    plt.title('Sales Trend by Year', fontsize=16)
+    plt.xlabel('Year', fontsize=12)
+    plt.ylabel('Total Sales', fontsize=12)
+
+    plt.tight_layout()
+    plt.show()
+
+
+## Sales by Region
+
+In this section, I analyze the total sales for each **Region** to identify which regions have the highest sales performance. The following code generates a bar plot to show the sales distribution across different regions.
+
+    ```python
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+
+    df['Region'] = df['Region'].astype(str)
+
+    sales_by_region = df.groupby('Region')['Sales'].sum().reset_index()
+
+    custom_colors = sns.color_palette("Set1", n_colors=10)
+
+    plt.figure(figsize=(10,6))
+    sns.barplot(x='Region', y='Sales', data=sales_by_region, palette=custom_colors)
+
+    plt.title('Sales by Region', fontsize=16)
+    plt.xlabel('Region', fontsize=12)
+    plt.ylabel('Total Sales', fontsize=12)
+
+    plt.tight_layout()
+    plt.show()
+
+
+## Top 10 States by Sales
+
+In this section, I analyze the total sales for the **top 10 states** based on overall sales performance. The following code generates a bar plot to visualize the sales distribution for the top 10 states.
+
+    ```python
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+
+    sales_by_state = df.groupby('State')['Sales'].sum().reset_index()
+    top_10_states = sales_by_state.nlargest(10, 'Sales')
+
+    plt.figure(figsize=(10,6))
+    sns.barplot(x='Sales', y='State', data=top_10_states, palette='Set1')
+
+    plt.title('Top 10 States by Sales', fontsize=16)
+    plt.xlabel('Total Sales', fontsize=12)
+    plt.ylabel('State', fontsize=12)
+
+    plt.tight_layout()
+    plt.show()
+
+
+
+
+
+
+
+
+
+
+
 
    
 
