@@ -475,6 +475,41 @@ In this section, we examine the total sales performance across various customer 
 
 
 
+## Top 10 States with Delayed Orders
+
+In this section, we focus on the states with the highest number of delayed orders. The bar chart below visualizes the distribution of delayed orders by state, helping us identify which states have the most significant delays in order shipments.
+
+    ```python
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+
+    df['Order Date'] = pd.to_datetime(df['Order Date'])
+    df['Ship Date'] = pd.to_datetime(df['Ship Date'])
+
+    df['Delayed_Order'] = df['Ship Date'] > df['Order Date'] + pd.Timedelta(days=3)
+    df['Delayed_Order'] = df['Delayed_Order'].map({True: 'Yes', False: 'No'})
+
+    delayed_orders_by_state = df[df['Delayed_Order'] == 'Yes'].groupby('State').size().reset_index(name='Delayed Count')
+
+    delayed_orders_by_state_sorted = delayed_orders_by_state.sort_values(by='Delayed Count', ascending=False).head(10)
+
+    plt.figure(figsize=(10,6))
+
+    unique_colors = sns.color_palette("Set3", n_colors=len(delayed_orders_by_state_sorted))
+
+    sns.barplot(x='State', y='Delayed Count', data=delayed_orders_by_state_sorted, palette=unique_colors)
+    plt.title('Top 10 States with Delayed Orders', fontsize=16)
+    plt.xlabel('State', fontsize=12)
+    plt.ylabel('Delayed Orders Count', fontsize=12)
+    plt.xticks(rotation=45)
+
+    plt.tight_layout()
+    plt.show()
+
+![Screenshot (56)](https://github.com/user-attachments/assets/043702ee-a0e5-4a2f-a535-76aaea8c25ee)
+
+
 
 
 
