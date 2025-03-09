@@ -265,6 +265,33 @@ In this section, I analyze the total sales for the **top 10 states** based on ov
 
     plt.tight_layout()
     plt.show()
+    
+## Sales Performance by Months of Year
+
+In this section, we analyze the sales performance over the months of each year. The bar plot below visualizes the total sales for each month, aggregated across all years, helping us identify trends and patterns in the sales data.
+
+    ```python
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+
+    df['Order Date'] = pd.to_datetime(df['Order Date'])
+    df['Month'] = df['Order Date'].dt.month
+    sales_by_month = df.groupby('Month')['Sales'].sum().reset_index()
+
+    plt.figure(figsize=(10,6))
+    sns.barplot(x='Month', y='Sales', data=sales_by_month, palette='Set1')
+
+    plt.title('Sales Performance by Months of Year', fontsize=16)
+    plt.xlabel('Month', fontsize=12)
+    plt.ylabel('Total Sales', fontsize=12)
+    plt.xticks(ticks=range(12), labels=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
+
+    plt.tight_layout()
+    plt.show()
+
+
+
 
 
 
