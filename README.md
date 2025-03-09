@@ -193,6 +193,8 @@ In this section, I analyze the sales distribution across the top 10 **Products**
 
     plt.tight_layout()
     plt.show()
+   ![Screenshot (43)](https://github.com/user-attachments/assets/703ada1b-52e5-4a6e-8a98-c5b43890a4d5)
+
 
  ## Sales Trend by Year
 
@@ -216,6 +218,8 @@ In this section, I visualize the sales trend over the years by grouping the data
 
     plt.tight_layout()
     plt.show()
+    
+![Screenshot (44)](https://github.com/user-attachments/assets/d6cca88f-e1f5-47d3-96bf-81c1aaca7f0c)
 
 
 ## Sales by Region
@@ -243,6 +247,9 @@ In this section, I analyze the total sales for each **Region** to identify which
     plt.tight_layout()
     plt.show()
 
+  ![Screenshot (46)](https://github.com/user-attachments/assets/51771276-9bb0-4717-8eb4-5906202fb377)
+
+
 
 ## Top 10 States by Sales
 
@@ -265,6 +272,10 @@ In this section, I analyze the total sales for the **top 10 states** based on ov
 
     plt.tight_layout()
     plt.show()
+
+
+![Screenshot (54)](https://github.com/user-attachments/assets/e287a19e-480f-4193-9158-591806722c32)
+
     
 ## Sales Performance by Months of Year
 
@@ -289,6 +300,8 @@ In this section, we analyze the sales performance over the months of each year. 
 
     plt.tight_layout()
     plt.show()
+    
+![Screenshot (48)](https://github.com/user-attachments/assets/9a92ddac-8ef2-42dd-a063-c55936e813da)
 
 
 ## Creating the `Delayed_Order` Column
@@ -329,6 +342,9 @@ In this section, we visualize the distribution of delayed orders versus on-time 
     plt.title('Distribution of Delayed vs On-Time Orders', fontsize=16)
 
     plt.show()
+    
+   ![Screenshot (49)](https://github.com/user-attachments/assets/a5467af1-1158-4610-ae8e-b738ecc52dc5)
+
 
 ## Delayed Orders Over Time
 
@@ -357,7 +373,9 @@ In this section, we analyze the distribution of delayed orders over time by year
     plt.ylabel('Delayed Orders Count', fontsize=12)
     plt.xticks(ticks=range(1, 13), labels=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
     plt.show()
-
+    
+ ![Screenshot (50)](https://github.com/user-attachments/assets/67b95ae8-686a-4d5f-8eed-a49fd5fcfc46)
+   
  ## Distribution of Delayed Orders by Product
 
 In this section, we focus on the distribution of delayed orders across different products. The bar plot below shows the top 10 products that have the highest number of delayed orders.
@@ -388,6 +406,8 @@ In this section, we focus on the distribution of delayed orders across different
     plt.ylabel('Product Name', fontsize=12)
     plt.tight_layout()
     plt.show()
+    
+![Screenshot (51)](https://github.com/user-attachments/assets/1dfe58a6-0e28-4490-a90c-8dc6c808d81b)
 
 
 ## Delayed Orders by Region
@@ -423,8 +443,9 @@ In this section, we analyze the distribution of delayed orders across different 
 
     plt.tight_layout()
     plt.show()
+![Screenshot (53)](https://github.com/user-attachments/assets/582d0c50-fc57-4c60-b3bf-f976d651bafe)
 
-    ## Sales by Customer Segment
+## Sales by Customer Segment
 
 In this section, we examine the total sales performance across various customer segments. The bar plot below shows the total sales for each customer segment.
 
@@ -450,6 +471,7 @@ In this section, we examine the total sales performance across various customer 
     plt.tight_layout()
     plt.show()
 
+![Screenshot (52)](https://github.com/user-attachments/assets/b2223b10-85d5-4471-b6c1-dbcea0e5b37f)
 
 
 
