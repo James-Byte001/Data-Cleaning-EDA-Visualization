@@ -291,6 +291,171 @@ In this section, we analyze the sales performance over the months of each year. 
     plt.show()
 
 
+## Creating the `Delayed_Order` Column
+
+In this section, we will create a new column called **`Delayed_Order`** to identify whether an order is delayed or not. An order is considered delayed if the **Ship Date** is more than 2 days after the **Order Date**.
+
+    ```python
+    import pandas as pd
+
+    df['Order Date'] = pd.to_datetime(df['Order Date'])
+    df['Ship Date'] = pd.to_datetime(df['Ship Date'])
+
+    df['Delayed_Order'] = df['Ship Date'] > df['Order Date'] + pd.Timedelta(days=4)
+
+    df['Delayed_Order'] = df['Delayed_Order'].map({True: 'Yes', False: 'No'})
+
+    print(df[['Order ID', 'Order Date', 'Ship Date', 'Delayed_Order']].head())
+
+
+ ## Distribution of Delayed vs On-Time Orders
+
+In this section, we visualize the distribution of delayed orders versus on-time orders using a pie chart. The chart below helps us understand the proportion of orders that are delayed compared to those that are shipped on time.
+
+    ```python
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+
+    delayed_orders = df[df['Delayed_Order'] == 'Yes']
+    on_time_orders = df[df['Delayed_Order'] == 'No']
+
+    delayed_count = len(delayed_orders)
+    on_time_count = len(on_time_orders)
+
+    plt.figure(figsize=(6,6))
+    plt.pie([on_time_count, delayed_count], labels=['On-Time Orders', 'Delayed Orders'], 
+        autopct='%1.1f%%', startangle=90, colors=['#1f77b4', '#ff7f0e'])
+
+    plt.title('Distribution of Delayed vs On-Time Orders', fontsize=16)
+
+    plt.show()
+
+## Delayed Orders Over Time
+
+In this section, we analyze the distribution of delayed orders over time by year and month. The line graph below shows the number of delayed orders for each month, helping us identify any seasonal trends.
+
+    ```python
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+
+    df['Order Date'] = pd.to_datetime(df['Order Date'])
+    df['Ship Date'] = pd.to_datetime(df['Ship Date'])
+
+    df['Delayed_Order'] = df['Ship Date'] > df['Order Date'] + pd.Timedelta(days=3)
+    df['Delayed_Order'] = df['Delayed_Order'].map({True: 'Yes', False: 'No'})
+
+    df['Year'] = df['Order Date'].dt.year
+    df['Month'] = df['Order Date'].dt.month
+
+    delayed_orders_by_time = df[df['Delayed_Order'] == 'Yes'].groupby(['Year', 'Month']).size().reset_index(name='Delayed Count')
+
+    plt.figure(figsize=(10,6))
+    sns.lineplot(data=delayed_orders_by_time, x='Month', y='Delayed Count', hue='Year', marker='o', palette='coolwarm')
+    plt.title('Delayed Orders Over Time', fontsize=16)
+    plt.xlabel('Month', fontsize=12)
+    plt.ylabel('Delayed Orders Count', fontsize=12)
+    plt.xticks(ticks=range(1, 13), labels=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
+    plt.show()
+
+ ## Distribution of Delayed Orders by Product
+
+In this section, we focus on the distribution of delayed orders across different products. The bar plot below shows the top 10 products that have the highest number of delayed orders.
+
+    ```python
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+
+    df['Order Date'] = pd.to_datetime(df['Order Date'])
+    df['Ship Date'] = pd.to_datetime(df['Ship Date'])
+
+    df['Delayed_Order'] = df['Ship Date'] > df['Order Date'] + pd.Timedelta(days=3)
+    df['Delayed_Order'] = df['Delayed_Order'].map({True: 'Yes', False: 'No'})
+
+    delayed_orders_by_product = df[df['Delayed_Order'] == 'Yes'].groupby('Product Name').size().reset_index(name='Delayed Count')
+
+    top_delayed_products = delayed_orders_by_product.sort_values(by='Delayed Count', ascending=False).head(10)
+
+    plt.figure(figsize=(12,8))
+
+
+    custom_colors = sns.color_palette("husl", n_colors=10)
+
+    sns.barplot(x='Delayed Count', y='Product Name', data=top_delayed_products, palette=custom_colors)
+    plt.title('Top 10 Products with Delayed Orders', fontsize=16)
+    plt.xlabel('Delayed Orders Count', fontsize=12)
+    plt.ylabel('Product Name', fontsize=12)
+    plt.tight_layout()
+    plt.show()
+
+
+## Delayed Orders by Region
+
+In this section, we analyze the distribution of delayed orders across different regions. The bar plot below shows how many delayed orders occurred in each region.
+
+    ```python
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+
+    df['Order Date'] = pd.to_datetime(df['Order Date'])
+    df['Ship Date'] = pd.to_datetime(df['Ship Date'])
+
+    df['Delayed_Order'] = df['Ship Date'] > df['Order Date'] + pd.Timedelta(days=3)
+    df['Delayed_Order'] = df['Delayed_Order'].map({True: 'Yes', False: 'No'})
+
+    delayed_orders_by_region = df[df['Delayed_Order'] == 'Yes'].groupby('Region').size().reset_index(name='Delayed Count')
+
+    # Sorting by the number of delayed orders in descending order
+    delayed_orders_by_region_sorted = delayed_orders_by_region.sort_values(by='Delayed Count', ascending=False)
+
+    plt.figure(figsize=(10,6))
+
+    # Use a beautiful color palette
+    beautiful_colors = sns.color_palette("magma", n_colors=len(delayed_orders_by_region_sorted))
+
+    sns.barplot(x='Region', y='Delayed Count', data=delayed_orders_by_region_sorted, palette=beautiful_colors)
+    plt.title('Delayed Orders by Region', fontsize=16)
+    plt.xlabel('Region', fontsize=12)
+    plt.ylabel('Delayed Orders Count', fontsize=12)
+    plt.xticks(rotation=45)
+
+    plt.tight_layout()
+    plt.show()
+
+    ## Sales by Customer Segment
+
+In this section, we examine the total sales performance across various customer segments. The bar plot below shows the total sales for each customer segment.
+
+    ```python
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+
+    df['Sales'] = pd.to_numeric(df['Sales'], errors='coerce')
+
+    sales_by_segment = df.groupby('Segment')['Sales'].sum().reset_index()
+
+    plt.figure(figsize=(10,6))
+
+    # Use a unique color palette
+    custom_palette = sns.color_palette("viridis", n_colors=len(sales_by_segment))
+
+    sns.barplot(x='Segment', y='Sales', data=sales_by_segment, palette=custom_palette)
+    plt.title('Total Sales by Customer Segment', fontsize=16)
+    plt.xlabel('Customer Segment', fontsize=12)
+    plt.ylabel('Total Sales', fontsize=12)
+
+    plt.tight_layout()
+    plt.show()
+
+
+
+
+
+
+
 
 
 
