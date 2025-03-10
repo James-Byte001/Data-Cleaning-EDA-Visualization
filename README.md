@@ -601,6 +601,162 @@ This analysis explores **which shipment modes are preferred by different custome
     plt.xticks(rotation=45)
     plt.show()
 
+## Preferred Shipment Mode by Top 10 States (Descending Order)
+
+This analysis explores **which shipment modes are preferred by the top 10 states** with the highest number of orders, sorted in descending order. Understanding these preferences helps optimize logistics and delivery efficiency.
+
+    ```python
+    import matplotlib.pyplot as plt
+    import pandas as pd
+
+    # Get top 10 states by total orders in descending order
+    top_10_states = df['State'].value_counts().head(10)
+    filtered_df = df[df['State'].isin(top_10_states.index)]
+
+    plt.figure(figsize=(12,6))
+    state_shipmode = filtered_df.groupby(['State', 'Ship Mode']).size().unstack()
+
+    # Sorting states based on total orders
+    state_shipmode = state_shipmode.loc[top_10_states.index]
+
+    # Unique colors for shipment modes
+    colors = ['skyblue', 'red', 'navy', 'gold']
+
+    state_shipmode.plot(kind='bar', stacked=True, color=colors, figsize=(12,6))
+
+    plt.title('Preferred Shipment Mode by Top 10 States (Descending Order)', fontsize=14, fontweight='bold')
+    plt.xlabel('State', fontsize=12)
+    plt.ylabel('Count of Orders', fontsize=12)
+    plt.legend(title='Ship Mode')
+
+    plt.xticks(rotation=45)
+    plt.show()
+    
+ ## Preferred Shipment Mode by Month
+
+This analysis explores **which shipment modes are preferred in different months of the year**. Identifying these trends can help businesses optimize logistics and ensure the availability of the most popular shipment modes during peak months.
+
+    ```python
+    import matplotlib.pyplot as plt
+    import pandas as pd
+
+    # Convert 'Order Date' to datetime format if not already done
+    df['Order Date'] = pd.to_datetime(df['Order Date'])
+
+    # Extract month name
+    df['Month'] = df['Order Date'].dt.strftime('%B')
+
+    # Define the order of months
+    month_order = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
+    plt.figure(figsize=(12,6))
+    month_shipmode = df.groupby(['Month', 'Ship Mode']).size().unstack()
+
+    # Reorder months correctly
+    month_shipmode = month_shipmode.reindex(month_order)
+
+    # Unique colors for shipment modes
+    colors = ['skyblue', 'red', 'navy', 'gold']
+
+    month_shipmode.plot(kind='bar', stacked=True, color=colors, figsize=(12,6))
+
+    plt.title('Preferred Shipment Mode by Month', fontsize=14, fontweight='bold')
+    plt.xlabel('Month', fontsize=12)
+    plt.ylabel('Count of Orders', fontsize=12)
+    plt.legend(title='Ship Mode')
+
+    plt.xticks(rotation=45)
+    plt.show()
+
+
+## Orders by Day of the Week
+
+This analysis explores **which days of the week have the highest number of orders**. Understanding this trend helps businesses plan for peak order days and optimize staffing or inventory accordingly.
+
+    ```python
+    import matplotlib.pyplot as plt
+    import pandas as pd
+
+    # Convert 'Order Date' to datetime format if not already done
+    df['Order Date'] = pd.to_datetime(df['Order Date'])
+
+    # Extract day of the week
+    df['Day of Week'] = df['Order Date'].dt.day_name()
+
+    # Define the order of days
+    day_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+
+    plt.figure(figsize=(10,6))
+    orders_per_day = df['Day of Week'].value_counts().reindex(day_order)
+
+    # Unique colors for each bar
+    colors = ['skyblue', 'red', 'navy', 'gold', 'green', 'purple', 'orange']
+
+    orders_per_day.plot(kind='bar', color=colors)
+
+    plt.title('Orders by Day of the Week', fontsize=14, fontweight='bold')
+    plt.xlabel('Day of the Week', fontsize=12)
+    plt.ylabel('Count of Orders', fontsize=12)
+ 
+    plt.xticks(rotation=45)
+    plt.show()
+
+## Top 10 Customers by Sales
+
+This analysis explores **the top 10 customers based on total sales**. Identifying high-value customers helps businesses develop personalized marketing strategies and loyalty programs.
+
+    ```python
+    import matplotlib.pyplot as plt
+    import pandas as pd
+
+    # Get top 10 customers by total sales
+    top_10_customers = df.groupby('Customer Name')['Sales'].sum().nlargest(10)
+
+    plt.figure(figsize=(12,6))
+
+    # Unique colors for each bar
+    colors = ['skyblue', 'red', 'navy', 'gold', 'green', 'purple', 'orange', 'pink', 'brown', 'gray']
+
+    top_10_customers.plot(kind='bar', color=colors)
+
+    plt.title('Top 10 Customers by Sales', fontsize=14, fontweight='bold')
+    plt.xlabel('Customer Name', fontsize=12)
+    plt.ylabel('Total Sales', fontsize=12)
+
+    plt.xticks(rotation=45)
+    plt.show()
+
+
+## Top 10 Customers by Order Count
+
+This analysis explores **the top 10 customers based on the number of orders placed**. Understanding which customers order most frequently helps in designing loyalty programs and targeted marketing campaigns.
+
+    ```python
+    import matplotlib.pyplot as plt
+    import pandas as pd
+
+    # Get top 10 customers by number of orders
+    top_10_customers_orders = df['Customer Name'].value_counts().nlargest(10)
+
+    plt.figure(figsize=(12,6))
+
+    # Unique colors for each bar
+    colors = ['skyblue', 'red', 'navy', 'gold', 'green', 'purple', 'orange', 'pink', 'brown', 'gray']
+
+    top_10_customers_orders.plot(kind='bar', color=colors)
+
+    plt.title('Top 10 Customers by Order Count', fontsize=14, fontweight='bold')
+    plt.xlabel('Customer Name', fontsize=12)
+    plt.ylabel('Number of Orders', fontsize=12)
+
+    plt.xticks(rotation=45)
+    plt.show()
+
+
+
+
+
+
 
 
 
