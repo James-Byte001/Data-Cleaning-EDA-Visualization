@@ -510,6 +510,101 @@ In this section, we focus on the states with the highest number of delayed order
 ![Screenshot (56)](https://github.com/user-attachments/assets/043702ee-a0e5-4a2f-a535-76aaea8c25ee)
 
 
+## Distribution of Shipment Modes
+
+In this section, I analyze the distribution of different **shipment modes** to understand which ones are used the most. The following code generates a bar plot to visualize the frequency of each shipment mode.
+
+    ```python
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+
+    custom_colors = ["#FF6F61", "#6B5B95", "#88B04B", "#F7CAC9"]
+
+    plt.figure(figsize=(8,5))
+    ax = sns.countplot(x=df['Ship Mode'], palette=custom_colors)
+
+    for p in ax.patches:
+    ax.annotate(f'{p.get_height()}', (p.get_x() + p.get_width() / 2, p.get_height()), 
+                ha='center', va='bottom', fontsize=12, fontweight='bold')
+
+    plt.title('Distribution of Shipment Modes', fontsize=14, fontweight='bold')
+    plt.xlabel('Shipment Mode', fontsize=12)
+    plt.ylabel('Count of Orders', fontsize=12)
+
+    plt.show()
+
+
+## Shipment Mode vs. Delivery Time
+
+In this section, I analyze the relationship between **Shipment Mode** and **Delivery Time** to understand how different shipping options impact the time taken for delivery. The following code generates a box plot to visualize the variation in delivery times across shipment modes.
+
+    ```python
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+
+    plt.figure(figsize=(10,6))
+    ax = sns.boxplot(x=df['Ship Mode'], y=df['Delivery_Time'], palette="Set2")
+
+    plt.title('Shipment Mode vs. Delivery Time', fontsize=14, fontweight='bold')
+    plt.xlabel('Shipment Mode', fontsize=12)
+    plt.ylabel('Delivery Time (in Days)', fontsize=12)
+
+    plt.show()
+
+
+    ## Preferred Shipment Mode by Region
+
+In this section, I analyze which **shipment modes are preferred in different regions**. This helps in understanding regional shipping trends and optimizing logistics. The following code generates a **stacked bar chart** to visualize the shipment mode distribution across regions.
+
+    ```python
+    import matplotlib.pyplot as plt
+    import pandas as pd
+
+    plt.figure(figsize=(12,6))
+    region_shipmode = df.groupby(['Region', 'Ship Mode']).size().unstack()
+
+    # Updated color palette with an additional unique color
+    colors = ['skyblue', 'red', 'navy', 'gold']
+
+    region_shipmode.plot(kind='bar', stacked=True, color=colors, figsize=(12,6))
+
+    plt.title('Preferred Shipment Mode by Region', fontsize=14, fontweight='bold')
+    plt.xlabel('Region', fontsize=12)
+    plt.ylabel('Count of Orders', fontsize=12)
+    plt.legend(title='Ship Mode')
+
+    plt.xticks(rotation=45)
+    plt.show()
+
+
+## Preferred Shipment Mode by Customer Segment
+
+This analysis explores **which shipment modes are preferred by different customer segments**. Understanding these trends helps in tailoring **logistics and marketing strategies**.
+
+    ```python
+    import matplotlib.pyplot as plt
+    import pandas as pd
+
+    plt.figure(figsize=(12,6))
+    segment_shipmode = df.groupby(['Segment', 'Ship Mode']).size().unstack()
+
+    # Unique colors for each shipment mode
+    colors = ['skyblue', 'red', 'navy', 'gold']
+
+    segment_shipmode.plot(kind='bar', stacked=True, color=colors, figsize=(12,6))
+
+    plt.title('Preferred Shipment Mode by Customer Segment', fontsize=14, fontweight='bold')
+    plt.xlabel('Customer Segment', fontsize=12)
+    plt.ylabel('Count of Orders', fontsize=12)
+    plt.legend(title='Ship Mode')
+
+    plt.xticks(rotation=45)
+    plt.show()
+
+
+
+
+
 
 
 
