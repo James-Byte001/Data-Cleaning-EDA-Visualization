@@ -533,6 +533,10 @@ In this section, I analyze the distribution of different **shipment modes** to u
 
     plt.show()
 
+    
+  ![Screenshot (57)](https://github.com/user-attachments/assets/7f2fea58-cd44-4e69-a408-bf1cd6b5a79e)
+
+
 
 ## Shipment Mode vs. Delivery Time
 
@@ -551,8 +555,9 @@ In this section, I analyze the relationship between **Shipment Mode** and **Deli
 
     plt.show()
 
+![Screenshot (58)](https://github.com/user-attachments/assets/f26e0243-f043-4c27-b409-51699ca71e49)
 
-    ## Preferred Shipment Mode by Region
+## Preferred Shipment Mode by Region
 
 In this section, I analyze which **shipment modes are preferred in different regions**. This helps in understanding regional shipping trends and optimizing logistics. The following code generates a **stacked bar chart** to visualize the shipment mode distribution across regions.
 
@@ -576,6 +581,7 @@ In this section, I analyze which **shipment modes are preferred in different reg
     plt.xticks(rotation=45)
     plt.show()
 
+![Screenshot (61)](https://github.com/user-attachments/assets/e190ab49-a3be-46c0-a1d4-408140f31f4a)
 
 ## Preferred Shipment Mode by Customer Segment
 
@@ -600,6 +606,9 @@ This analysis explores **which shipment modes are preferred by different custome
 
     plt.xticks(rotation=45)
     plt.show()
+
+    
+![Screenshot (63)](https://github.com/user-attachments/assets/cb08758a-514b-4e81-ae6a-38c1417620ba)
 
 ## Preferred Shipment Mode by Top 10 States (Descending Order)
 
@@ -631,7 +640,11 @@ This analysis explores **which shipment modes are preferred by the top 10 states
 
     plt.xticks(rotation=45)
     plt.show()
+
     
+ 
+![Screenshot (64)](https://github.com/user-attachments/assets/92de9bee-b1cf-475c-b8e1-283b9e60ca3e)
+
  ## Preferred Shipment Mode by Month
 
 This analysis explores **which shipment modes are preferred in different months of the year**. Identifying these trends can help businesses optimize logistics and ensure the availability of the most popular shipment modes during peak months.
@@ -668,6 +681,7 @@ This analysis explores **which shipment modes are preferred in different months 
     plt.xticks(rotation=45)
     plt.show()
 
+![Screenshot (66)](https://github.com/user-attachments/assets/c842ec3d-ac89-450b-9d99-d37197db762b)
 
 ## Orders by Day of the Week
 
@@ -701,6 +715,9 @@ This analysis explores **which days of the week have the highest number of order
     plt.xticks(rotation=45)
     plt.show()
 
+    
+![Screenshot (68)](https://github.com/user-attachments/assets/88f1b428-efc3-4a54-a00b-23de33aea0e1)
+
 ## Top 10 Customers by Sales
 
 This analysis explores **the top 10 customers based on total sales**. Identifying high-value customers helps businesses develop personalized marketing strategies and loyalty programs.
@@ -726,6 +743,7 @@ This analysis explores **the top 10 customers based on total sales**. Identifyin
     plt.xticks(rotation=45)
     plt.show()
 
+![Screenshot (70)](https://github.com/user-attachments/assets/33cb6cca-9a78-4f70-a544-550d6b4bf107)
 
 ## Top 10 Customers by Order Count
 
@@ -754,6 +772,7 @@ This analysis explores **the top 10 customers based on the number of orders plac
 
 
 
+![Screenshot (72)](https://github.com/user-attachments/assets/0cc2b9f7-6a15-45cb-a658-b9ab3bc2959d)
 
 
 
